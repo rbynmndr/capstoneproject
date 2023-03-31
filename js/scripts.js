@@ -71,20 +71,6 @@ if (dropdownCheck !== null) {
 }
   
 
-/* Card Slider - Swiper */
-var cardSlider = new Swiper('.card-slider', {
-	autoplay: {
-		delay: 4000,
-		disableOnInteraction: false
-	},
-	loop: true,
-	navigation: {
-		nextEl: '.swiper-button-next',
-		prevEl: '.swiper-button-prev'
-	}
-});
-
-
 /* Back To Top Button */
 // Get the button
 myButton = document.getElementById("myBtn");
