@@ -477,6 +477,19 @@ a:hover {
 
 .header p {
 	color: #ffffff;
+	text-align: justify;
+}
+
+.header a:hover {
+	color: #ca7300;
+}
+
+.header a span {
+	transition: 0.5s all ease-in-out;
+}
+
+.header a:hover span {
+	transform: translateX(50%);	
 }
 
 .header .btn-solid-lg {
