@@ -627,7 +627,9 @@ a:hover {
 
 .ex-basic-1 .text-box {
 	padding: 1.25rem 1.25rem 0.5rem 1.25rem;
-	background-color: #f7f9fd;
+	background-color: #fff2de;
+	border-left: 4px solid #ff9900ef;
+	border-radius: 5px;
 }
 
 .ex-basic-1 .text-box p a {
