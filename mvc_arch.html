@@ -80,19 +80,22 @@
                 <div class="row">
                     <div class="col-xl-10 offset-xl-1">
                         
-                        <p class="first-paragraph">Microservice architecture is an approach to software development that involves breaking down a large, monolithic application into smaller, independent services that can be developed, deployed, and scaled independently. Each microservice performs a specific function and communicates with other microservices using well-defined <a class="yellow" href="https://aws.amazon.com/what-is/api/" target="_blank">APIs</a>.</p>
+                        <p class="first-paragraph">The model-view-controller (MVC) pattern divides an application into three components: A model, a view, and a controller.
+                            The application data and essential functionality are included in the model, which is the pattern's main building block. It governs the application's data and logic and is the dynamic data structure of the software. The logic that explains how the data is presented to a user is absent, though.</p>
+                        <p>The view communicates with the user while displaying application data. It has access to the model's data, but it is unable to comprehend that data or how it may be changed.</p>
                         <div class="container">
                             <div class="row">
                                 <div class="col-xl-10 offset-xl-1 mb-3">
-                                    <img class="img-fluid mt-3" src="images/microservices.png" alt="microservice">
-                                    <span class="img-ref">Image from <a href="https://redhat.com/" class="yellow">redhat.com</a>.</span>
+                                    <img class="img-fluid mt-3" src="images/mvc.png" alt="MVC pattern">
+                                    <span class="img-ref">Image from <a href="https://medium.com/" class="yellow">medium.com</a>.</span>
                                 </div>
                             </div>
                         </div>
-                        <p class="mb-3">AWS uses a microservices architecture to build cloud-based applications. This architecture pattern enables AWS to break down complex applications into smaller, more manageable services, which can be easily scaled and deployed independently.</p>
-                        <h3 class="mb-2">Building Microservice in AWS</h3>
-                        <p>Here we are going to create a basic microservice api that read, create and update data in database table. Firstly we create database table using <a class="read-more yellow" href="https://aws.amazon.com/dynamodb" target="_blank">Amazon DynamoDB</a>. Then we create business logic for the application with lambda fuction using <a class="read-more yellow" href="https://aws.amazon.com/lambda" target="_blank">Amazon Lambda</a>. 
-                        At last, we create API using <a class="read-more yellow" href="https://aws.amazon.com/api-gateway">Amazon API Gateway</a>.</p>
+                        <p class="mb-3">The controller acts as an interface between the model and the display and manages user input. It produces the necessary outputs after listening to external inputs from the view or a user. In order to produce suitable replies, the controller calls the model.</p>
+                        
+                        <h3 class="mb-2">Building MVC design pattern in AWS</h3>
+                        <p>Here we are going to create a basic MVC web application that read and create data in database table. Firstly we create model for the application using <a class="read-more yellow" href="https://aws.amazon.com/dynamodb" target="_blank">Amazon DynamoDB</a>. Then we create controller for the application with lambda fuction using <a class="read-more yellow" href="https://aws.amazon.com/lambda" target="_blank">Amazon Lambda</a> and create API using
+                        <a class="read-more yellow" href="https://aws.amazon.com/api-gateway">Amazon API Gateway</a>. At last, we create view or UI for our application using <a class="read-more yellow" href="https://aws.amazon.com/amplify/" target="_blank">AWS Amplify</a>.</p>
                         
                         <h5><u>How it works?</u></h5>
                         <ul class="list-unstyled li-space-lg mb-3">
@@ -102,7 +105,7 @@
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">Clients send request our microservices by making HTTP API calls.</div>
+                                <div class="flex-grow-1">Clients send request to our web application by making HTTP API calls through frontend which is hosted in AWS Amplify.</div>
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
@@ -114,7 +117,7 @@
                             </li>
                         </ul>
                         <p class="mb-3">So When we invoke our API Gateway API, API Gateway routes the request to your Lambda function. The Lambda function interacts with DynamoDB, and returns a response to API Gateway. API Gateway then returns a response to us.<br>You can use AWS free tier account to perform following steps.</p>
-                        <h6>Data Storage</h6>
+                        <h6>Creating Model</h6>
                         <div class="text-box mb-3">                            
                             <p>For setting up DynamoDB for the application follow the guide on <a class="read-more yellow" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SettingUp.html" target="_blank">Setting Up DynamoDB</a> by AWS.
                             </p>
@@ -143,8 +146,8 @@
                             </li>
                         </ul>
                         <p class="mb-3">For detail guide on how to create database table in DynamoDB, follow the given <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/getting-started-step-1.html" target="_blank"><strong>link</strong></a>.</p>
-                        <h6>Business logic</h6>
-                        <p>We will use AWS Lambda to create business logic or lambda function for the application. This lambda function create, reads, update and delete items in DynamoDB. The function uses events from API Gateway to determine how to interact with DynamoDB.</p>
+                        <h6>Creating Controller</h6>
+                        <p>We will use AWS Lambda to create controller or lambda function for the application. This lambda function create, reads, update and delete items in DynamoDB. The function uses events from API Gateway to determine how to interact with DynamoDB.</p>
                         <p>To create lambda function:</p>
                         <ul class="list-unstyled li-space-lg mb-3">
                             <li class="d-flex">
@@ -361,8 +364,9 @@
                                 <div class="flex-grow-1">Choose <strong>Deploy</strong>. Note the API's <strong>Invoke URL</strong>.</div>
                             </li>
                         </ul>
-                        <p>Now you can test the API with the help of Postman.</p>
-                        <p class="mb-5">For detail information about creating APIs in API Gateway, you can follow this <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html"><strong>link</strong></a>.</p>
+                        <p class="mb-3">For detail information about creating APIs in API Gateway, you can follow this <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html"><strong>link</strong></a>.</p>
+                        <h6>Creating View</h6>
+                        
                     </div> <!-- end of col -->
                 </div> <!-- end of row -->
             </div> <!-- end of container -->
