@@ -275,7 +275,7 @@
                         <ul class="list-unstyled li-space-lg mb-3">
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">Sign in to the API Gateway console at <a href="https://console.aws.amazon.com/apigateway" target="_blank">https://console.aws.amazon.com/apigateway</a>.</div>
+                                <div class="flex-grow-1">Sign in to the API Gateway console at <a href="https://console.aws.amazon.com/apigateway" target="_blank"><u>https://console.aws.amazon.com/apigateway</u></a>.</div>
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
@@ -366,7 +366,97 @@
                         </ul>
                         <p class="mb-3">For detail information about creating APIs in API Gateway, you can follow this <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html"><strong>link</strong></a>.</p>
                         <h6>Creating View</h6>
-                        
+                        <p>To create frontend for our application, create a new file on text editor and paste the following code in it.</p>
+                        <pre>
+                            <code>
+                                &lt;!DOCTYPE html&gt;
+                                &lt;html&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset=&quot;UTF-8&quot;&gt;
+                                    &lt;title&gt;MVC&lt;/title&gt;
+                                    &lt;script&gt;
+                                        // define the callAPI function that takes a first name and last name as parameters
+                                        var callAPI = (firstName,lastName)=&gt;{
+                                            // instantiate a headers object
+                                            var myHeaders = new Headers();
+                                            // add content type header to object
+                                            myHeaders.append(&quot;Content-Type&quot;, &quot;application/json&quot;);
+                                            // using built in JSON utility package turn object to string and store in a variable
+                                            var raw = JSON.stringify({&quot;firstName&quot;:firstName,&quot;lastName&quot;:lastName});
+                                            // create a JSON object with parameters for API call and store in a variable
+                                            var requestOptions = {
+                                                method: 'POST',
+                                                headers: myHeaders,
+                                                body: raw,
+                                                redirect: 'follow'
+                                            };
+                                            // make API call with parameters and use promises to get response
+                                            fetch(&quot;YOUR-API-INVOKE-URL&quot;, requestOptions)
+                                            .then(response =&gt; response.text())
+                                            .then(result =&gt; alert(JSON.parse(result).body))
+                                            .catch(error =&gt; console.log('error', error));
+                                        }
+                                    &lt;/script&gt;
+                                &lt;/head&gt;
+
+                                &lt;body&gt;
+                                    &lt;form&gt;
+                                        &lt;label&gt;First Name :&lt;/label&gt;
+                                        &lt;input type=&quot;text&quot; id=&quot;fName&quot;&gt;
+                                        &lt;label&gt;Last Name :&lt;/label&gt;
+                                        &lt;input type=&quot;text&quot; id=&quot;lName&quot;&gt;
+                                        &lt;!-- set button onClick method to call function we defined passing input values as parameters --&gt;
+                                        &lt;button type=&quot;button&quot; onclick=&quot;callAPI(document.getElementById('fName').value,document.getElementById('lName').value)&quot;&gt;Call API&lt;/button&gt;
+                                    &lt;/form&gt;
+                                &lt;/body&gt;
+                                &lt;/html&gt;
+                            </code>
+                        </pre>
+                        <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Save the file as <i>index.html</i>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Compress the <i>index.html</i> file using <strong>ZIP</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Sign in to the Amplify console. <a href="https://console.aws.amazon.com/amplify/home"><u>https://console.aws.amazon.com/amplify/home</u></a></div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the <strong>Get Started</strong> section, under <strong>Host your web app</strong>, click <strong>Get started</strong> button.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Select <strong>Deploy without Git provider</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose the <strong>Continue</strong> button. And in the App Name field enter <strong>webapp</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">For Environment name, enter <strong>dev</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Select the <strong>Drag and drop</strong> method.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose the zipped file and click <strong>Save and deploy</strong> button.</div>
+                            </li>
+                        </ul>
+                        <h6>Testing web app</h6>
+                        <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Select <strong>Domain Management</strong> from the Amplify dashboard. Copy and paste the URL into the browser.</div>
+                            </li>
+                        </ul>
                     </div> <!-- end of col -->
                 </div> <!-- end of row -->
             </div> <!-- end of container -->
