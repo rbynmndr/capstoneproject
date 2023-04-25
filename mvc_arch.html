@@ -32,8 +32,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#header">Software Architecture Pattern</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#header" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Software Architecture Pattern</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                                <li><a class="dropdown-item" href="micro_arch.html">Microservice Architecture</a></li>
+                                <li><div class="dropdown-divider"></div></li>
+                                <li><a class="dropdown-item" href="mvc_arch.html">MVC Architecture</a></li>
+                            </ul>
                         </li>                        
                     </ul>
                     <span class="navbar-text ms-auto">
@@ -50,7 +55,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-10 offset-xl-1">
-                        <h1>Software Architecture Pattern<span> for learning</span></h1>
+                        <h1>Model-View-Controller Architecture<span> for learning</span></h1>
                     </div> <!-- end of col -->
                 </div> <!-- end of row -->
             </div> <!-- end of container -->
@@ -74,13 +79,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-10 offset-xl-1">
-                        <p class="first-paragraph">Just like the architecture of a building, software architecture describes the design and collection of components into systems that make up the building blocks of software. Software architecture explains the structural composition of the software program and the interactions between the elements. The principle that defines the software organization schema for these software systems is called an architectural pattern.
-                        </p>
-                        <p>The architectural pattern captures the design structures of numerous systems and software pieces in order for them to be reused. Over the course of producing software code, developers experience identical issues several times across a project, the organisation, and their careers. One solution is to develop design patterns that provide engineers with a reusable technique to handle these difficulties, allowing software engineers to get the same structural result for a specific project.</p>
-                        <p class="mb-5">There are various software architecture patterns that are commonly used in software development.</p>
-
-                        <h2 class="mb-3">Microservices Architecture</h2>
-                        <p>Microservice architecture is an approach to software development that involves breaking down a large, monolithic application into smaller, independent services that can be developed, deployed, and scaled independently. Each microservice performs a specific function and communicates with other microservices using well-defined <a class="yellow" href="https://aws.amazon.com/what-is/api/" target="_blank">APIs</a>.</p>
+                        
+                        <p class="first-paragraph">Microservice architecture is an approach to software development that involves breaking down a large, monolithic application into smaller, independent services that can be developed, deployed, and scaled independently. Each microservice performs a specific function and communicates with other microservices using well-defined <a class="yellow" href="https://aws.amazon.com/what-is/api/" target="_blank">APIs</a>.</p>
                         <div class="container">
                             <div class="row">
                                 <div class="col-xl-10 offset-xl-1 mb-3">
@@ -135,7 +135,7 @@
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">For partition key, enter <strong>studentId</strong>.</div>
+                                <div class="flex-grow-1">For partition key, enter <strong>id</strong>.</div>
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
@@ -145,7 +145,6 @@
                         <p class="mb-3">For detail guide on how to create database table in DynamoDB, follow the given <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/getting-started-step-1.html" target="_blank"><strong>link</strong></a>.</p>
                         <h6>Business logic</h6>
                         <p>We will use AWS Lambda to create business logic or lambda function for the application. This lambda function create, reads, update and delete items in DynamoDB. The function uses events from API Gateway to determine how to interact with DynamoDB.</p>
-                        
                         <p>To create lambda function:</p>
                         <ul class="list-unstyled li-space-lg mb-3">
                             <li class="d-flex">
@@ -158,81 +157,212 @@
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">Enter table details here. For table name enter <strong>Student</strong>.</div>
+                                <div class="flex-grow-1">Choose <strong>Author from scratch</strong>.</div>
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">For partition key, enter <strong>studentId</strong>.</div>
+                                <div class="flex-grow-1">For Name, enter <strong>studentFunction</strong> as lambda function name.</div>
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">Leave <strong>Default Setting</strong> selected and choose <strong>Create</strong> to create the table.</div>
+                                <div class="flex-grow-1">For Execution role, choose <strong>Create a new role from AWS policy templates</strong>.</div>
                             </li>
-                        </ul>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">For Role Name, enter <strong>studentRole</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">For Policy templates, choose <strong>Simple microservice permissions</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Create function</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the Configure function pane, under <strong>Function code</strong> copy the following code and paste it in the inline code editor.</div>
+                            </li>
+                            <li class="d-flex">
+                                <div class="flex-grow-1">
+                                    <pre>
+                                        <code>
+                            const AWS = require(“aws-sdk”);
+                            const dynamo = new AWS.DynamoDB.DocumentClient();
+                            exports.handler = async (event, context) => {
+                                let body;
+                                let statusCode = 200;
+                                const headers = {
+                                “Content-Type”: “application/json”
+                            };
+                            try {
+                                switch (event.httpMethod) {
+                                    case “DELETE”:
+                                        await dynamo
+                                        .delete({
+                                            TableName: “Student”,
+                                            Key: {
+                                                id: event.pathParameters.id
+                                            }
+                                        })
+                                        .promise();
+                                        body = `Deleted student ${event.pathParameters.id}`;
+                                        break;
 
-                        <h2 class="mb-3">Layered Architecture</h2>
-                        <p>Layered architecture is a software design pattern that involves breaking down an application into multiple layers, each responsible for a specific function. The layers are organized in a hierarchical manner, such that when a user initiates an input, such as clicking a button, the presentation layer sends messages to the lower layer, the application layer, which, in turn, calls the business layer, then the data access layer that accesses the database.</p>
-                        <p>Layered architecture patterns are found in many e-commerce web applications and desktop applications. It is also useful for applications that need to be built quickly and for enterprise applications that need to adopt traditional IT processes. Furthermore, a layered pattern is ideal for applications that require strict standards of testability.</p>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xl-10 offset-xl-1 mb-3">
-                                    <img class="img-fluid mt-3" src="images/layered.jpg" alt="Layered">
-                                    <span class="img-ref">Image from <a href="https://oreilly.com/" class="yellow">Oreilly</a>.</span>
+                                    case “GET”:
+                                        if (event.pathParameters != null) {
+                                            body = await dynamo
+                                            .get({
+                                                TableName: “Student”,
+                                                Key: {
+                                                    id: event.pathParameters.id
+                                                }
+                                            })
+                                            .promise();
+                                        } else {
+                                            body = await dynamo.scan({ TableName: “Student” }).promise();
+                                        }
+                                        break;
+
+                                    case “POST”:
+                                        let requestJSON = JSON.parse(event.body);
+                                        await dynamo
+                                        .put({
+                                            TableName: “Student”,
+                                            Item: {
+                                                id: requestJSON.id,
+                                                name: requestJSON.name,
+                                            }
+                                        })
+                                        .promise();
+                                        body = `Added/Updated student ${requestJSON.id}`;
+                                        break;
+                                    default:
+                                        throw new Error(`Unsupported route: “${event.httpMethod}”`);
+                                }
+                            } catch (err) {
+                                statusCode = 400;
+                                body = err.message;
+                            } finally {
+                                body = JSON.stringify(body);
+                            }
+                            return {
+                                statusCode,
+                                body,
+                                headers
+                            };
+                            };
+                                        </code>
+                                    </pre>
                                 </div>
-                            </div>
-                        </div>
-
-                        <p>AWS provides a range of services that can be used to implement each layer of the architecture, enabling developers to focus on building the functionality of the application rather than managing infrastructure. Additionally, AWS provides a range of tools for monitoring and managing the performance of the application, ensuring that it is running smoothly and efficiently.</p>
-                        <ul class="list-unstyled li-space-lg mb-3">
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>Presentation Layer</strong> is responsible for presenting information to the user and receiving input. AWS provides <a class="read-more yellow" href="https://aws.amazon.com/s3/?nc2=type_a" target="_blank">Amazon S3</a> service for storing static contents.</div>
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>Application Layer</strong> is responsible for implementing the business logic of the application. AWS provides a range of services that can be used to build and deploy applications, such as AWS Lambda for serverless computing, Amazon ECS for container management, and <a class="read-more yellow" href="https://aws.amazon.com/ec2/?nc2=type_a" target="_blank">AWS Elastic Beanstalk</a> for deploying and scaling web applications.</div>
-                            </li>
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>Data Layer</strong> is responsible for managing data storage and retrieval. AWS provides a range of services that can be used to build and deploy data-intensive applications, such as <a class="read-more yellow" href="https://aws.amazon.com/rds/?nc2=type_a" target="_blank">Amazon RDS</a> for managed relational databases, <a class="read-more yellow" href="https://aws.amazon.com/dynamodb/?nc2=type_a" target="_blank">Amazon DynamoDB</a> for managed NoSQL databases, and Amazon S3 for object storage.</div>
-                            </li>
-                        </ul>
-                        <p>To learn more about layered architecture in AWS, click the button below.</p>
-                        <a class="btn-solid-reg mb-5" href="https://aws.amazon.com/what-is/architecture-diagramming/#seo-faq-pairs#what-software-ad-patterns" target="_blank">Layered architecture in AWS</a>
-
-                        <h2 class="mb-3">Service-Oriented Architecture</h2>
-                        <p>Service-oriented architecture enables interaction between remote application components. Services are abstract, loosely connected, and independent of language. Interfaces allow applications to get access to them. Instead of starting from scratch, developers may leverage existing services. Since services may be deployed across numerous servers, service-oriented architecture is commonly employed in distributed systems. 
-                            SOA is implemented using a range of technologies and standards, such as SOAP, REST, XML, and WSDL. These technologies enable services to communicate with each other across different platforms and languages.</p>
-                        <p>In SOA, each service performs a specific function, such as retrieving customer data, processing a payment, or generating a report. Services communicate with each other using well-defined interfaces, which specify the data format, protocols, and operations that are supported. SOA typically involves several key components, including:</p>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xl-10 offset-xl-1 mb-3">
-                                    <img class="img-fluid mt-3" src="images/soa.jpg" alt="Layered"><br>
-                                    <span class="img-ref">Image from <a href="https://geeksforgeeks.org/" class="yellow">geeksforgeeks</a>.</span>
-                                </div>
-                            </div>
-                        </div>
-                        <ul class="list-unstyled li-space-lg mb-3">
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>Service interface</strong> defines the operations that a service provides, as well as the input and output parameters for each operation.</div>
-                            </li>
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>Service description</strong> provides additional information about the service, such as its purpose, functionality, and quality of service requirements.</div>
-                            </li>
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>Service discovery</strong> enables services to locate and communicate with other services. Service discovery can be performed using a registry, directory, or broker.</div>
-                            </li>
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>Service composition</strong> involves combining multiple services to create more complex functionality. Service composition can be performed using a variety of techniques, such as orchestration.</div>
+                                <div class="flex-grow-1">Choose <strong>Deploy</strong>.</div>
                             </li>
                         </ul>
                         
-                        <p>To learn more about service-oriented architecture in AWS, click the button below.</p>
-                        <a class="btn-solid-reg mb-5" href="https://aws.amazon.com/what-is/service-oriented-architecture/" target="_blank">Service-Oriented architecture in AWS</a>
+                        <p>The handler method is the method that will be executed when the lambda function is invoked. This function takes in two objects, event, and context. The event object contains all of the data sent from the event source and the context object provides several methods that allow you to interact with runtime information specific to that lambda function.</p>
+                        <p>By using the event.httpMethod to differentiate the HTTP request, we can perform the create/update/delete and retrieve data from DynamoDB.</p>
+                        <p class="mb-3">You can go through this <a target="_blank" href="https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html"><strong>link</strong></a> for detail information about creating, involing, view logs and metrics.</p>
+
+                        <h6>API Gateway</h6>
+                        <p>All the requests and responses are handle through API. So, we create REST API in API Gateway. When the application receive HTTP request, API Gateway invokes the lambda function.</p>
+                        <p>To create API in API Gateway:</p>
+                        <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Sign in to the API Gateway console at <a href="https://console.aws.amazon.com/apigateway" target="_blank">https://console.aws.amazon.com/apigateway</a>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Create API</strong>. Under <strong>REST API</strong>, choose <strong>Build</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>New Api</strong>, and enter API Name as <strong>studentAPI</strong> and set Endpoint Type to <strong>Regional</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Create API</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Under <strong>Resources</strong>, from the <strong>Actions</strong> menu, choose <strong>Create Resource</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Enter Resource Name as <strong>student</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Click on <strong>Create Resource</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the Resources list, select <strong>/student</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the Actions menu, choose <strong>Create Method</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Select <strong>POST</strong> to insert a new record.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Set <strong>Integration Type</strong> to <strong>Lambda Function</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Use Lambda Proxy integration</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose Lambda Function to <strong>studentFunction</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Click the <strong>Save</strong> button, a message with <strong>Add Permission to Lambda Function</strong> will pop out, click OK to grant the permission.</div>
+                            </li>
+                        </ul>
+                        <p>For API GET by id and DELETE by id, we need to create another resource to specify path parameters.</p>
+                        <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the Resources list, select <strong>/student</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the Actions menu, choose <strong>Create Resource</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Replace Resource Path with <strong>{id}</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Click on <strong>Create Resource</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Repeat the <strong>Create Method</strong> steps to create GET and DELETE methods.</div>
+                            </li>
+                        </ul>
+                        <p>To deploy the created API:</p>
+                        <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Deploy API</strong> from the Actions dropdown menu.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Deploy</strong>. Note the API's <strong>Invoke URL</strong>.</div>
+                            </li>
+                        </ul>
+                        <p>Now you can test the API with the help of Postman.</p>
+                        <p class="mb-5">For detail information about creating APIs in API Gateway, you can follow this <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html"><strong>link</strong></a>.</p>
                     </div> <!-- end of col -->
                 </div> <!-- end of row -->
             </div> <!-- end of container -->

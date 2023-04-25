@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Webpage Title -->
+        <title>Software Architecture Pattern</title>
+        
+        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;600&display=swap" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome-all.min.css" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet">
+        
+        <!-- Favicon  -->
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    </head>
+    <body data-bs-spy="scroll" data-bs-target="#navbarExample">
+        
+        <!-- Navigation -->
+        <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
+            <div class="container">
+
+                <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto navbar-nav-scroll">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#header" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Software Architecture Pattern</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                                <li><a class="dropdown-item" href="micro_arch.html">Microservice Architecture</a></li>
+                                <li><div class="dropdown-divider"></div></li>
+                                <li><a class="dropdown-item" href="mvc_arch.html">MVC Architecture</a></li>
+                            </ul>
+                        </li>                        
+                    </ul>
+                    <span class="navbar-text ms-auto">
+                        AWS for Software Architecture
+                    </span>
+                </div> <!-- end of navbar-collapse -->
+            </div> <!-- end of container -->
+        </nav> <!-- end of navbar -->
+        <!-- end of navigation -->
+
+        
+        <!-- Header -->
+        <header class="ex-header" id="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-10 offset-xl-1">
+                        <h1>Microservice Architecture<span> for learning</span></h1>
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </header> <!-- end of ex-header -->
+        <!-- end of header -->
+
+        <!-- Basic -->
+        <div class="ex-basic-1 pt-5 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img class="img-fluid mb-5 mt-5" src="images/pattern.jpg" alt="software architecture pattern">                        
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of ex-basic-1 -->
+        <!-- end of basic -->
+
+        <!-- Basic -->
+        <div class="ex-basic-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-10 offset-xl-1">
+                        
+                        <p class="first-paragraph">Microservice architecture is an approach to software development that involves breaking down a large, monolithic application into smaller, independent services that can be developed, deployed, and scaled independently. Each microservice performs a specific function and communicates with other microservices using well-defined <a class="yellow" href="https://aws.amazon.com/what-is/api/" target="_blank">APIs</a>.</p>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-10 offset-xl-1 mb-3">
+                                    <img class="img-fluid mt-3" src="images/microservices.png" alt="microservice">
+                                    <span class="img-ref">Image from <a href="https://redhat.com/" class="yellow">redhat.com</a>.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-3">AWS uses a microservices architecture to build cloud-based applications. This architecture pattern enables AWS to break down complex applications into smaller, more manageable services, which can be easily scaled and deployed independently.</p>
+                        <h3 class="mb-2">Building Microservice in AWS</h3>
+                        <p>Here we are going to create a basic microservice api that read, create and update data in database table. Firstly we create database table using <a class="read-more yellow" href="https://aws.amazon.com/dynamodb" target="_blank">Amazon DynamoDB</a>. Then we create business logic for the application with lambda fuction using <a class="read-more yellow" href="https://aws.amazon.com/lambda" target="_blank">Amazon Lambda</a>. 
+                        At last, we create API using <a class="read-more yellow" href="https://aws.amazon.com/api-gateway">Amazon API Gateway</a>.</p>
+                        
+                        <h5><u>How it works?</u></h5>
+                        <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Amazon API Gateway hosts RESTful HTTP requests and responses to customers. In this scenario, API Gateway provides built-in authorization, throttling, security, fault tolerance, request/response mapping, and performance optimizations.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Clients send request our microservices by making HTTP API calls.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">AWS Lambda contains the business logic to process incoming API calls and leverage DynamoDB as a persistent storage.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Amazon DynamoDB persistently stores microservices data and scales based on demand. Since microservices are often designed to do one thing well, a schemaless NoSQL data store is regularly incorporated.</div>
+                            </li>
+                        </ul>
+                        <p class="mb-3">So When we invoke our API Gateway API, API Gateway routes the request to your Lambda function. The Lambda function interacts with DynamoDB, and returns a response to API Gateway. API Gateway then returns a response to us.<br>You can use AWS free tier account to perform following steps.</p>
+                        <h6>Data Storage</h6>
+                        <div class="text-box mb-3">                            
+                            <p>For setting up DynamoDB for the application follow the guide on <a class="read-more yellow" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SettingUp.html" target="_blank">Setting Up DynamoDB</a> by AWS.
+                            </p>
+                        </div> <!-- end of text-box -->
+                        <p>To create a table in DynamoDB, sign in to the aws management console.</p>
+                        <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Open DynamoDB console. <a href="https://console.aws.amazon.com/dynamodb/" target="_blank"><u>https://console.aws.amazon.com/dynamodb/</u></a></div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the dashboard of the console choose <strong>Create Table</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Enter table details here. For table name enter <strong>Student</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">For partition key, enter <strong>id</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Leave <strong>Default Setting</strong> selected and choose <strong>Create</strong> to create the table.</div>
+                            </li>
+                        </ul>
+                        <p class="mb-3">For detail guide on how to create database table in DynamoDB, follow the given <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/getting-started-step-1.html" target="_blank"><strong>link</strong></a>.</p>
+                        <h6>Business logic</h6>
+                        <p>We will use AWS Lambda to create business logic or lambda function for the application. This lambda function create, reads, update and delete items in DynamoDB. The function uses events from API Gateway to determine how to interact with DynamoDB.</p>
+                        <p>To create lambda function:</p>
+                        <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Open Lambda console. <a href="https://console.aws.amazon.com/lambda/" target="_blank"><u>https://console.aws.amazon.com/lambda/</u></a></div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the dashboard of the console choose <strong>Create Function</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Author from scratch</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">For Name, enter <strong>studentFunction</strong> as lambda function name.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">For Execution role, choose <strong>Create a new role from AWS policy templates</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">For Role Name, enter <strong>studentRole</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">For Policy templates, choose <strong>Simple microservice permissions</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Create function</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the Configure function pane, under <strong>Function code</strong> copy the following code and paste it in the inline code editor.</div>
+                            </li>
+                            <li class="d-flex">
+                                <div class="flex-grow-1">
+                                    <pre>
+                                        <code>
+                            const AWS = require(“aws-sdk”);
+                            const dynamo = new AWS.DynamoDB.DocumentClient();
+                            exports.handler = async (event, context) => {
+                                let body;
+                                let statusCode = 200;
+                                const headers = {
+                                “Content-Type”: “application/json”
+                            };
+                            try {
+                                switch (event.httpMethod) {
+                                    case “DELETE”:
+                                        await dynamo
+                                        .delete({
+                                            TableName: “Student”,
+                                            Key: {
+                                                id: event.pathParameters.id
+                                            }
+                                        })
+                                        .promise();
+                                        body = `Deleted student ${event.pathParameters.id}`;
+                                        break;
+
+                                    case “GET”:
+                                        if (event.pathParameters != null) {
+                                            body = await dynamo
+                                            .get({
+                                                TableName: “Student”,
+                                                Key: {
+                                                    id: event.pathParameters.id
+                                                }
+                                            })
+                                            .promise();
+                                        } else {
+                                            body = await dynamo.scan({ TableName: “Student” }).promise();
+                                        }
+                                        break;
+
+                                    case “POST”:
+                                        let requestJSON = JSON.parse(event.body);
+                                        await dynamo
+                                        .put({
+                                            TableName: “Student”,
+                                            Item: {
+                                                id: requestJSON.id,
+                                                name: requestJSON.name,
+                                            }
+                                        })
+                                        .promise();
+                                        body = `Added/Updated student ${requestJSON.id}`;
+                                        break;
+                                    default:
+                                        throw new Error(`Unsupported route: “${event.httpMethod}”`);
+                                }
+                            } catch (err) {
+                                statusCode = 400;
+                                body = err.message;
+                            } finally {
+                                body = JSON.stringify(body);
+                            }
+                            return {
+                                statusCode,
+                                body,
+                                headers
+                            };
+                            };
+                                        </code>
+                                    </pre>
+                                </div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Deploy</strong>.</div>
+                            </li>
+                        </ul>
+                        
+                        <p>The handler method is the method that will be executed when the lambda function is invoked. This function takes in two objects, event, and context. The event object contains all of the data sent from the event source and the context object provides several methods that allow you to interact with runtime information specific to that lambda function.</p>
+                        <p>By using the event.httpMethod to differentiate the HTTP request, we can perform the create/update/delete and retrieve data from DynamoDB.</p>
+                        <p class="mb-3">You can go through this <a target="_blank" href="https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html"><strong>link</strong></a> for detail information about creating, involing, view logs and metrics.</p>
+
+                        <h6>API Gateway</h6>
+                        <p>All the requests and responses are handle through API. So, we create REST API in API Gateway. When the application receive HTTP request, API Gateway invokes the lambda function.</p>
+                        <p>To create API in API Gateway:</p>
+                        <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Sign in to the API Gateway console at <a href="https://console.aws.amazon.com/apigateway" target="_blank">https://console.aws.amazon.com/apigateway</a>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Create API</strong>. Under <strong>REST API</strong>, choose <strong>Build</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>New Api</strong>, and enter API Name as <strong>studentAPI</strong> and set Endpoint Type to <strong>Regional</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Create API</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Under <strong>Resources</strong>, from the <strong>Actions</strong> menu, choose <strong>Create Resource</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Enter Resource Name as <strong>student</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Click on <strong>Create Resource</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the Resources list, select <strong>/student</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the Actions menu, choose <strong>Create Method</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Select <strong>POST</strong> to insert a new record.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Set <strong>Integration Type</strong> to <strong>Lambda Function</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Use Lambda Proxy integration</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose Lambda Function to <strong>studentFunction</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Click the <strong>Save</strong> button, a message with <strong>Add Permission to Lambda Function</strong> will pop out, click OK to grant the permission.</div>
+                            </li>
+                        </ul>
+                        <p>For API GET by id and DELETE by id, we need to create another resource to specify path parameters.</p>
+                        <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the Resources list, select <strong>/student</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">In the Actions menu, choose <strong>Create Resource</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Replace Resource Path with <strong>{id}</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Click on <strong>Create Resource</strong>.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Repeat the <strong>Create Method</strong> steps to create GET and DELETE methods.</div>
+                            </li>
+                        </ul>
+                        <p>To deploy the created API:</p>
+                        <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Deploy API</strong> from the Actions dropdown menu.</div>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Choose <strong>Deploy</strong>. Note the API's <strong>Invoke URL</strong>.</div>
+                            </li>
+                        </ul>
+                        <p>Now you can test the API with the help of Postman.</p>
+                        <p class="mb-5">For detail information about creating APIs in API Gateway, you can follow this <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html"><strong>link</strong></a>.</p>
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of ex-basic-1 -->
+        <!-- end of basic -->
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img class="img-fluid w-50" src="images/uc.png">
+                        <p class="p-small mt-2">A capstone project on <strong>AWS for software architecture</strong> in Semester 1st, 2023</p>
+                    </div> <!-- end of col -->
+                    <div class="col-lg-3 offset-lg-1">
+                        <h6>Team Members</h6>
+                        <ul class="list-unstyled li-space-lg p-small">
+                            <li>Robin Manandhar (u3232884)</li>
+                            <li>Sujan Adhikari</li>
+                            <li>Divyang Patel</li>
+                        </ul>
+                    </div><!-- end of col -->
+                    <div class="col-lg-2">
+                        <h6>Sponsors</h6>
+                        <ul class="list-unstyled li-space-lg p-small">
+                            <li>Prof. Dr. Richa Awasthy</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 custom-text-align">
+                        <h6>Mentors</h6>
+                        <ul class="list-unstyled li-space-lg p-small">
+                            <li>Munir Saeed</li>
+                        </ul>
+                    </div>
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of footer -->  
+        <!-- end of footer -->
+
+
+        <!-- Copyright -->
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="p-small">Group ID: 11522-23-23 | Project ID: 2023-S1-40</p>
+                    </div> <!-- end of col -->
+                </div> <!-- enf of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of copyright --> 
+        <!-- end of copyright -->
+
+        <!-- Back To Top Button -->
+        <button onclick="topFunction()" id="myBtn">
+            <img src="images/up-arrow.png" alt="alternative">
+        </button>
+        <!-- end of back to top button -->
+            
+        <!-- Scripts -->
+        <script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+        <script src="js/scripts.js"></script> <!-- Custom scripts -->
+    </body>
+</html>

@@ -311,6 +311,10 @@ a:hover {
 	color: #ff9900;
 }
 
+pre{
+	background-color: #f0f0f0;
+	border-radius: 10px;
+}
 
 /**********************/
 /*     Navigation     */
