@@ -267,7 +267,7 @@
                         
                         <p>The handler method is the method that will be executed when the lambda function is invoked. This function takes in two objects, event, and context. The event object contains all of the data sent from the event source and the context object provides several methods that allow you to interact with runtime information specific to that lambda function.</p>
                         <p>By using the event.httpMethod to differentiate the HTTP request, we can perform the create/update/delete and retrieve data from DynamoDB.</p>
-                        <p class="mb-3">You can go through this <a target="_blank" href="https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html"><strong>link</strong></a> for detail information about creating, involing, view logs and metrics.</p>
+                        <p class="mb-3">You can go through this <a target="_blank" href="https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html"><strong>link</strong></a> for detail information about creating, invoking, view logs and metrics.</p>
 
                         <h6>API Gateway</h6>
                         <p>All the requests and responses are handle through API. So, we create REST API in API Gateway. When the application receive HTTP request, API Gateway invokes the lambda function.</p>
@@ -375,14 +375,12 @@
                                     &lt;meta charset=&quot;UTF-8&quot;&gt;
                                     &lt;title&gt;MVC&lt;/title&gt;
                                     &lt;script&gt;
-                                        // define the callAPI function that takes a first name and last name as parameters
-                                        var callAPI = (firstName,lastName)=&gt;{
-                                            // instantiate a headers object
+                                        var saveStudent = (id,name)=&gt;{
                                             var myHeaders = new Headers();
                                             // add content type header to object
                                             myHeaders.append(&quot;Content-Type&quot;, &quot;application/json&quot;);
                                             // using built in JSON utility package turn object to string and store in a variable
-                                            var raw = JSON.stringify({&quot;firstName&quot;:firstName,&quot;lastName&quot;:lastName});
+                                            var raw = JSON.stringify({&quot;id&quot;:id,&quot;name&quot;:name});
                                             // create a JSON object with parameters for API call and store in a variable
                                             var requestOptions = {
                                                 method: 'POST',
@@ -401,18 +399,22 @@
 
                                 &lt;body&gt;
                                     &lt;form&gt;
-                                        &lt;label&gt;First Name :&lt;/label&gt;
-                                        &lt;input type=&quot;text&quot; id=&quot;fName&quot;&gt;
-                                        &lt;label&gt;Last Name :&lt;/label&gt;
-                                        &lt;input type=&quot;text&quot; id=&quot;lName&quot;&gt;
+                                        &lt;label&gt;Student ID :&lt;/label&gt;
+                                        &lt;input type=&quot;text&quot; id=&quot;id&quot;&gt;
+                                        &lt;label&gt;Student Name :&lt;/label&gt;
+                                        &lt;input type=&quot;text&quot; id=&quot;name&quot;&gt;
                                         &lt;!-- set button onClick method to call function we defined passing input values as parameters --&gt;
-                                        &lt;button type=&quot;button&quot; onclick=&quot;callAPI(document.getElementById('fName').value,document.getElementById('lName').value)&quot;&gt;Call API&lt;/button&gt;
+                                        &lt;button type=&quot;button&quot; onclick=&quot;saveStudent(document.getElementById('id').value,document.getElementById('sName').value)&quot;&gt;Save&lt;/button&gt;
                                     &lt;/form&gt;
                                 &lt;/body&gt;
                                 &lt;/html&gt;
                             </code>
                         </pre>
                         <ul class="list-unstyled li-space-lg mb-3">
+                            <li class="d-flex">
+                                <i class="fas fa-square"></i>
+                                <div class="flex-grow-1">Similarly, create function to call api for GET, UPDATE and DELETE method.</div>
+                            </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
                                 <div class="flex-grow-1">Save the file as <i>index.html</i>.</div>
@@ -482,7 +484,7 @@
                     <div class="col-lg-2">
                         <h6>Sponsors</h6>
                         <ul class="list-unstyled li-space-lg p-small">
-                            <li>Prof. Dr. Richa Awasthy</li>
+                            <li>Dr. Richa Awasthy</li>
                         </ul>
                     </div>
                     <div class="col-lg-2 custom-text-align">
